@@ -15,3 +15,6 @@ storage/*.tut
 storage/*.tmt
 storage/*.cyh
 storage/*.tsn
+storage/*.hat
+storage/*.asht
+storage/*.tls
