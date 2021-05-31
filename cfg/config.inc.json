@@ -1,29 +1,32 @@
 {
-    "botToken":"",
-    "storagePath":"storage/",
-    "maxFileSize":5048578,
-    "loopRefresh":50000,
-    "keyFile":"./cfg/keyFile.json",
-    "validExtensions":[
-        ".ePro",
-        ".epro",
-        ".acm",
-        ".zxc",
-        ".hc",
-        ".sks",
-        ".tut",
-        ".tmt",
-        ".cyh",
-        ".tsn",
-        ".kfd",
-        ".dsi",
-        ".rf"
-    ],
-    "stats":{
-        "totalFiles":0,
-        "decryptedFiles":0,
-        "failedFiles":0
-    },
-    "language":"english",
-    "layout":"default"
+	"botToken": "920676640:AAFRsvptK9aj12G9eaxBy_Wki2bf5wF8arw",
+	"storagePath": "storage/",
+	"maxFileSize": 5048578,
+	"loopRefresh": 50000,
+	"keyFile": "./cfg/keyFile.json",
+	"validExtensions": [
+		".ePro",
+		".epro",
+		".acm",
+		".zxc",
+		".hc",
+		".sks",
+		".tut",
+		".tmt",
+		".cyh",
+		".tsn",
+		".kfd",
+		".dsi",
+		".rf",
+		".hat",
+		".asht",
+		".tls"
+	],
+	"stats": {
+		"totalFiles": 268,
+		"decryptedFiles": 7,
+		"failedFiles": 0
+	},
+	"language": "english",
+	"layout": "default"
 }

@@ -1,6 +1,6 @@
 {
   "name": "hcdrill-tg",
-  "version": "2.1.1",
+  "version": "2.1.3",
   "description": "Telegram bot designed for decrypt stuff",
   "main": "HCDrill.js",
   "scripts": {
