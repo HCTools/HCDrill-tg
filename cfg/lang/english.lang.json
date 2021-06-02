@@ -20,7 +20,6 @@
     "_note2": "Note field 2",
     "_sshAddr": "SSH Address",
     "_mobileData": "Config blocked for mobile data only?",
-    "_unlockProxy": "Unlock proxy field?",
     "_unlockProxyCredentials": "Unlock proxy credentials?",
     "_unlockProxy": "Unlock proxy field?",
     "_openVPNConfig": "OpenVPN Configuration File",
