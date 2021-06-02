@@ -1,5 +1,5 @@
 {
-	"botToken": "",
+	"botToken": "920676640:AAFRsvptK9aj12G9eaxBy_Wki2bf5wF8arw",
 	"storagePath": "storage/",
 	"maxFileSize": 5048578,
 	"loopRefresh": 50000,
@@ -20,11 +20,12 @@
 		".rf",
 		".hat",
 		".asht",
-		".tls"
+		".tls",
+		".ehi"
 	],
 	"stats": {
-		"totalFiles": 0,
-		"decryptedFiles": 0,
+		"totalFiles": 274,
+		"decryptedFiles": 5,
 		"failedFiles": 0
 	},
 	"language": "english",
