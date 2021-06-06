@@ -49,7 +49,7 @@ try {
     process.exit();
 }
 //splash
-console.log("HCDrill v2.1.1\r\nCopyright (c) HCTools Group - 2021\r\nCoded by P7COMunications LLC");
+console.log("HCDrill v2.2.1\r\nCopyright (c) HCTools Group - 2021\r\nCoded by P7COMunications LLC");
 for(let c = 0; c < process.argv.length; c++) {
     switch(process.argv[c]) {
         case "--botToken":

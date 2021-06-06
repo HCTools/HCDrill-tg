@@ -1,8 +1,8 @@
 {
 	"botToken": "",
 	"storagePath": "storage/",
-	"maxFileSize": 5048578,
-	"loopRefresh": 50000,
+	"maxFileSize": 1048578,
+	"loopRefresh": 5000,
 	"keyFile": "./cfg/keyFile.json",
 	"validExtensions": [
 		".ePro",
@@ -22,7 +22,8 @@
 		".asht",
 		".tls",
 		".ehi",
-		".ehil"
+		".ehil",
+		".npv2"
 	],
 	"stats": {
 		"totalFiles": 0,
