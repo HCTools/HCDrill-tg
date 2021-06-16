@@ -125,12 +125,40 @@ setInterval(loopFunction, configFile["loopRefresh"]);
 const apiTelegram = require('node-telegram-bot-api');
 const bot = new apiTelegram(configFile["botToken"], {polling: true});
 bot.on('message', function(message) {
-    if(message.from.is_bot) { return; } //ignoring messages from other bots
+	var chatID = parseInt(message.chat.id); //Message sender user id.
+	var messageText= message.text; //Recieved message content.
+	var banRegex = /\/ban (\d)/;
+	var unbanRegex = /\/unban (\d)/;
+	
+    if(message.from.is_bot) { return; } //ignoring messages from other bots.
+	if(configFile["banned"].includes(chatID)){ return;} //ignoring messages from banned users.
+	
+	if (banRegex.test(messageText)){
+		if(!configFile["admins"].includes(chatID)){//ignore if sender's not an admin.
+			bot.sendMessage(chatID, languageFile["notAdmin"], {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
+			return;
+			}
+		let banID = parseInt(messageText.split(" ")[1]);//user to be banned id.
+		configFile["banned"].push(banID);
+		bot.sendMessage(banID, languageFile["bannedWarning"]);
+		bot.sendMessage(chatID, languageFile["bannedUser"]+banID, {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
+		return;
+	}
+	else if (unbanRegex.test(messageText)){
+		let unbanID = parseInt(messageText.split(" ")[1]); //user to be un-banned id.
+		for( let i = 0; i < configFile["banned"].length; i++){ 
+				if ( configFile["banned"][i] === unbanID){
+					configFile["banned"].splice(i, 1); //Remove user from ban list.
+					bot.sendMessage(unbanID, languageFile["unbannedWarning"]);
+					bot.sendMessage(chatID, languageFile["unbannedUser"]+unbanID, {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
+				}
+		}
+	}
     switch(message.text) {
         //here goes any custom slash commands and respective actions
         case "/start":
             //action
-            bot.sendMessage(message.chat.id, languageFile["startMessage"], {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
+            bot.sendMessage(chatID, languageFile["startMessage"], {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
             return;
         case "/statsd":
             //action

@@ -1,5 +1,10 @@
 {
     "invalidFile": "Inexistent file path/name, aborting...",
+	"bannedUser":"User banned\n ID: ",
+	"unbannedUser":"User un-banned\n ID:",
+	"notAdmin": "Sorry, you're not an admin.",
+	"bannedWarning":"You've been banned from using the bot. contact @discomforting for info.",
+    "unbannedWarning":"You've been un-banned from using the bot.\ndon't do it again :)",
     "heavyFile": "The file is too heavy!",
     "invalidExtension": "File extension not supported!",
     "decryptionFailed": "Decryption failed, incompatible encryption method or algorithm.",

@@ -4,6 +4,14 @@
 	"maxFileSize": 1048578,
 	"loopRefresh": 5000,
 	"keyFile": "./cfg/keyFile.json",
+	"admins": [
+		487239563,
+		136369937,
+		777453885,
+		975825815,
+		1778221035
+	],
+	"banned": [],
 	"validExtensions": [
 		".ePro",
 		".epro",
