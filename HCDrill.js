@@ -168,6 +168,10 @@ bot.on('message', function(message) {
             response += languageFile["statsMessage_failedfiles"] + " " + configFile["stats"]["failedFiles"] + "\r\n";
             bot.sendMessage(message.chat.id, response, {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
             return;
+		case "/uptime":
+			var uptimeMessage = languageFile["uptime"] + mainUtils.format_time();
+			bot.sendMessage(message.chat.id, uptimeMessage, {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
+			return;
     }
     if(!message.document) { return; } //ignoring other messages that aren't a document
     /*ignore other file extensions foreign to whitelist*/

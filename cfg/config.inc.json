@@ -1,5 +1,5 @@
 {
-	"botToken": "",
+	"botToken": "1592304748:AAER6lCW8GWJftyB0v6TGc0wtslYAFe5Xh0",
 	"storagePath": "storage/",
 	"maxFileSize": 1048578,
 	"loopRefresh": 5000,
@@ -34,10 +34,10 @@
 		".npv2"
 	],
 	"stats": {
-		"totalFiles": 0,
-		"decryptedFiles": 0,
+		"totalFiles": 16,
+		"decryptedFiles": 5,
 		"failedFiles": 0
 	},
-	"language": "english",
+	"language": "arabic",
 	"layout": "default"
 }
