@@ -111,7 +111,7 @@
     "_V2RayAlterId": "V2Ray اسم بديل",
     "_V2RayTLS": "V2Ray SSL/SNI",
     "_V2RayTLSInsecure": "V2Ray Allow Insecure SSL",
-    "_V2RayNetwork": "V2Ray نوع شبكة,
+    "_V2RayNetwork": "V2Ray نوع شبكة",
     "_V2RayProtocol": "V2Ray بروتوكول",
     "_V2RayPass": "V2Ray كلمة سر",
     "_V2RayWSPath": "V2Ray WebSocket Path",
