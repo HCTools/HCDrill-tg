@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
-* HCDrill v2.2.1 - Telegram version
+* HCDrill v2.2.2 - Telegram version
 * Coded by PANCHO7532 - P7COMunications LLC
 * Copyright (c) HCTools Group - 2021
 *
@@ -16,6 +16,7 @@ const path = require('path');
 const mainUtils = require('./lib/mainUtils');
 var configFile;
 var languageFile;
+var usersFile; //json database to store user ids and usernames. useful for /announce command.
 var layoutFile;
 var cleanFiles = true;
 var showHelp = false;
@@ -48,6 +49,14 @@ try {
     console.log("[ERORR] - There was an error while loading the layout file.");
     process.exit();
 }
+try {
+    usersFile = JSON.parse(fs.readFileSync(__dirname + "/cfg/chatIDS.json"));
+} catch(error) {
+    console.log("[ERROR] - There was an error while loading chat IDs file at module " + path.parse(__filename)["base"]);
+    process.exit();
+}
+
+
 //splash
 console.log("HCDrill v2.2.1\r\nCopyright (c) HCTools Group - 2021\r\nCoded by P7COMunications LLC");
 for(let c = 0; c < process.argv.length; c++) {
@@ -114,9 +123,10 @@ if(showHelp) {
 function loopFunction() {
     //this function will execute in an interval method every few seconds
     try {
+		fs.writeFileSync(__dirname + "/cfg/chatIDS.json", JSON.stringify(usersFile, null, "\t"));
         fs.writeFileSync(__dirname + "/cfg/config.inc.json", JSON.stringify(configFile, null, "\t"));
     } catch(error) {
-        console.log("[ERROR] - An error occured writing the configuration file.");
+        console.log("[ERROR] - An error occured writing the configuration or the database file.");
         process.exit();
     }
 }
@@ -129,10 +139,20 @@ bot.on('message', function(message) {
 	var messageText= message.text; //Recieved message content.
 	var banRegex = /\/ban (\d)/;
 	var unbanRegex = /\/unban (\d)/;
-	
     if(message.from.is_bot) { return; } //ignoring messages from other bots.
 	if(configFile["banned"].includes(chatID)){ return;} //ignoring messages from banned users.
 	
+	/*
+	Here we check if the user exists in our cahtIDS.json
+	If not, we create a new user.
+	*/
+	if(!usersFile.hasOwnProperty(chatID)){
+		usersFile[chatID]= {
+						   "date_joined":Date(),
+						   "username":message.from.username,
+						   "language_code":message.from.language_code
+						   }
+		}
 	if (banRegex.test(messageText)){
 		if(!configFile["admins"].includes(chatID)){//ignore if sender's not an admin.
 			bot.sendMessage(chatID, languageFile["notAdmin"], {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
