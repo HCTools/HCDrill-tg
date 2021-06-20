@@ -1,4 +1,5 @@
 {
+	"cantBanAdmin":"You can't ban other admins.",
 	"uptime":"The bot has been up for: ",
     "invalidFile": "Inexistent file path/name, aborting...",
 	"bannedUser":"User banned\n ID: ",
