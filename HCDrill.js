@@ -120,6 +120,23 @@ if(showHelp) {
     process.exit();
 }
 //functions
+function banUser(actionID,unban){
+	//let actionID = parseInt(messageText.split(" ")[1]);//user to be banned id.
+	if (!unban){configFile["banned"].push(actionID);return;}
+	
+	for( let i = 0; i < configFile["banned"].length; i++){ 
+				if ( configFile["banned"][i] === actionID){
+					configFile["banned"].splice(i, 1); //Remove user from ban list.
+					}
+	}
+	return;
+}
+function isAdmin(userID){
+	if(configFile["admins"].includes(userID)){//ignore if sender's not an admin.
+		return true;
+	}
+	return false;
+}
 function loopFunction() {
     //this function will execute in an interval method every few seconds
     try {
@@ -136,6 +153,7 @@ const apiTelegram = require('node-telegram-bot-api');
 const bot = new apiTelegram(configFile["botToken"], {polling: true});
 bot.on('message', function(message) {
 	var chatID = parseInt(message.chat.id); //Message sender user id.
+	var userID = parseInt(message.from.id); //sender's user id.
 	var messageText= message.text; //Recieved message content.
 	var banRegex = /\/ban (\d)/;
 	var unbanRegex = /\/unban (\d)/;
@@ -154,26 +172,28 @@ bot.on('message', function(message) {
 						   }
 		}
 	if (banRegex.test(messageText)){
-		if(!configFile["admins"].includes(chatID)){//ignore if sender's not an admin.
+		let banID = parseInt(messageText.split(" ")[1]);
+		if(isAdmin(banID)){bot.sendMessage(chatID,languageFile["cantBanAdmin"]);return;}//Ignores banning other admins.
+		if(!isAdmin(chatID)){//ignore if sender's not an admin.
 			bot.sendMessage(chatID, languageFile["notAdmin"], {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
 			return;
 			}
-		let banID = parseInt(messageText.split(" ")[1]);//user to be banned id.
-		configFile["banned"].push(banID);
+		banUser(banID,false)
 		bot.sendMessage(banID, languageFile["bannedWarning"]);
 		bot.sendMessage(chatID, languageFile["bannedUser"]+banID, {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
 		return;
 	}
 	else if (unbanRegex.test(messageText)){
 		let unbanID = parseInt(messageText.split(" ")[1]); //user to be un-banned id.
-		for( let i = 0; i < configFile["banned"].length; i++){ 
-				if ( configFile["banned"][i] === unbanID){
-					configFile["banned"].splice(i, 1); //Remove user from ban list.
-					bot.sendMessage(unbanID, languageFile["unbannedWarning"]);
-					bot.sendMessage(chatID, languageFile["unbannedUser"]+unbanID, {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
-				}
+		if(!isAdmin(chatID)){//ignore if sender's not an admin.
+			bot.sendMessage(chatID, languageFile["notAdmin"], {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
+			return;
+			}
+		banUser(unbanID,true);
+		bot.sendMessage(unbanID, languageFile["unbannedWarning"]);
+		bot.sendMessage(chatID, languageFile["unbannedUser"]+unbanID, {reply_to_message_id: message.message_id}).catch(function(error) { console.log("[ERROR] - " + error.message + " at chat id: " + message.chat.id)});
 		}
-	}
+	
     switch(message.text) {
         //here goes any custom slash commands and respective actions
         case "/start":
