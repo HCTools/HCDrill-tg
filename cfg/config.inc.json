@@ -1,5 +1,5 @@
 {
-	"botToken": "<REDACTED>",
+	"botToken": "",
 	"storagePath": "storage/",
 	"maxFileSize": 1048578,
 	"loopRefresh": 5000,
@@ -35,8 +35,8 @@
 		".vhd"
 	],
 	"stats": {
-		"totalFiles": 16,
-		"decryptedFiles": 5,
+		"totalFiles": 0,
+		"decryptedFiles": 0,
 		"failedFiles": 0
 	},
 	"language": "english",
