@@ -31,7 +31,8 @@
 		".tls",
 		".ehi",
 		".ehil",
-		".npv2"
+		".npv2",
+		".vhd"
 	],
 	"stats": {
 		"totalFiles": 16,
